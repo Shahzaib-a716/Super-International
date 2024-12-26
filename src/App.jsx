@@ -1,6 +1,5 @@
 // src/App.js
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Step1 from './Components/Step1';
 import Step2 from './Components/Step2';
