@@ -133,8 +133,8 @@ const Step3 = () => {
             </h1>
           </a>
           <div className="flex justify-center items-center">
-            <h1 className="md:text-3xl font-extrabold text-yellow-500">
-              SEND UP TO 4 DIFFERENT TYPES OF MESSAGES AND
+            <h1 className="md:text-3xl font-extrabold text-yellow-600">
+              Select One or more types of messages & then press OK to send it
             </h1>
           </div>
         </div>

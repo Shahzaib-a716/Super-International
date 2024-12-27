@@ -8,14 +8,17 @@ const BookingForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneCode: "+1", // Default country code (you can set this to any default code)
+    phoneNumber: "",
   });
 
   const [error, setError] = useState("");
+  const [tooltip, setTooltip] = useState(""); // Tooltip state
 
   // Validation functions
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
-  const validatePhone = (phone) => /^\d{10,15}$/.test(phone);
+  const validatePhone = (phone) =>
+    /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(phone);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -27,9 +30,19 @@ const BookingForm = () => {
     setError(""); // Clear error when user starts typing
   };
 
+  // Handle phone code change
+  const handlePhoneCodeChange = (e) => {
+    const { value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      phoneCode: value,
+    }));
+    setError(""); // Clear error when user starts typing
+  };
+
   // Check if email and phone are valid
   const areEmailAndPhoneValid =
-    validateEmail(formData.email) && validatePhone(formData.phone);
+    validateEmail(formData.email) && validatePhone(formData.phoneCode + formData.phoneNumber);
 
   // Navigate to the next page on icon click
   const handleIconClick = () => {
@@ -40,145 +53,166 @@ const BookingForm = () => {
     }
   };
 
+  // Tooltip handlers
+  const handleTooltip = (message) => {
+    setTooltip(message); // Set tooltip message
+  };
+
+  const clearTooltip = () => {
+    setTooltip(""); // Clear tooltip when mouse leaves
+  };
+
   return (
     <div className="min-h-screen w-full bg-gray-800 bg-day bg-no-repeat bg-center bg-cover">
-      <div className="relative flex justify-center items-center py-8">
-        <div className="font-myriad flex flex-col gap-6 justify-center items-center w-full md:w-[650px] bg-gray-800">
-          {/* Header */}
-          <div
-            id="header"
-            className="flex flex-col gap-2 justify-start px-4 relative bg-center bg-cover w-full h-36"
-            style={{
-              backgroundImage: "url('/assets/images/head0.webp')", // Replace with your image path
-              backgroundSize: "cover", // Ensures the image covers the entire area
-              backgroundPosition: "center", // Centers the image
-            }}
-          >
-            <div className="flex mt- gap-4 items-start justify-start">
-              <h1
-                className="m-0 pt-4 text-3xl md:text-3xl font-extrabold text-white drop-shadow-lg shadow-black"
-                style={{
-                  textShadow:
-                    "3px 0px 0px rgb(0, 0, 0), 0px -1px 0px rgb(0, 0, 0), 0px 1px 0px rgb(0, 0, 0), -1px 0px 0px rgb(0, 0, 0)",
-                }}
-              >
-                <span className="text-red-600 text-5xl shadow-black font-bold">MY</span>
-                <span className="text-gray-400 text-3xl font-bold">MULTI TIME ZONE</span>
-              </h1>
-              <img
-                className="w-[80px] h-[80px] rounded-full"
-                src="/assets/images/Handyman0.png"
-                alt="Handyman"
-              />
-            </div>
-            <div className="flex items-center justify-between gap-10">
-              <h1 className="font-bold text-3xl text-white">
-                Super International Booking System
-              </h1>
-              <div className="tooltip-container">
-                <img
-                  className="w-16 h-16 rounded-full "
-                  src="/assets/images/help.webp"
-                  alt="Help"
-                />
-              </div>
-            </div>
-          </div>
+      {/* Top Heading Section */}
+      <div className="w-full bg-gray-800 text-center py-4">
+        <h2 className="text-green-400 text-2xl sm:text-3xl lg:text-4xl font-bold">
+          STAND ALONE <br />
+          MULTI-TIME-ZONE <br />
+        </h2>
+        <h2 className="text-yellow-400 text-2xl sm:text-3xl lg:text-4xl font-bold">
+          SUPER INTERNATIONAL <br />
+          BOOKING SYSTEM <br />
+        </h2>
+      </div>
 
-          {/* Form Section */}
-          <div className="px-8 w-full">
-            <form className="rounded-md flex flex-col gap-4 p-4">
-              {/* Name Field */}
-              <div className="flex gap-3">
-                <img
-                  src="/assets/images/1.jpg"
-                  className="w-16 rounded-full cursor-auto"
-                  alt="Name Icon"
-                />
-                <input
-                  className="w-full text-3xl border-none rounded-md placeholder:text-black placeholder:text-center bg-white focus:ring-indigo-500"
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="WHAT IS YOUR NAME?"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  autoFocus
-                />
-              </div>
-
-              {/* Email Field */}
-              <div className="flex gap-3">
-                <img
-                  src="/assets/images/2.jpg"
-                  className="w-16 rounded-full cursor-auto"
-                  alt="Email Icon"
-                />
-                <input
-                  className="w-full text-2xl md:text-3xl border-none rounded-md placeholder:text-black placeholder:text-center bg-white focus:ring-indigo-500"
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  autoComplete="off"
-                />
-              </div>
-
-              {/* Phone Field */}
-              <div className="flex gap-3">
-                <img
-                  src="/assets/images/3.jpg"
-                  className="w-16 rounded-full cursor-auto"
-                  alt="Phone Icon"
-                />
-                <input
-                  className="w-full text-3xl border-none rounded-md placeholder:text-black placeholder:text-center bg-white focus:ring-indigo-500"
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
-            </form>
-
-            {/* Conditional Icon Display */}
-            {areEmailAndPhoneValid && (
-              <div className="flex justify-center mt-6">
-                <img
-                  src="/assets/images/button ok check.webp"
-                  alt="Success Icon"
-                  className="w-[100px] h-[100px] mt-4"
-                  onClick={handleIconClick} // Add the click handler
-                  style={{ cursor: "pointer" }} // Optional: Add a pointer cursor to show it’s clickable
-                />
-                <p className="text-yellow-500 text-3xl font-bold ml-9 mt-8">
-                 Check Email and Phone are valid?
-                </p>
-              </div>
-            )}
-
-            {error && <p className="text-red-500 mt-2">{error}</p>}
+      {/* Header Section */}
+      <div className="flex justify-center items-center my-4">
+        <div
+          id="header"
+          className="w-full max-w-lg h-36 bg-center bg-cover relative"
+          style={{
+            backgroundImage: "url('/assets/images/heaad.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Tooltip Display Area */}
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white text-lg sm:text-2xl font-bold bg-black bg-opacity-75 text-nowrap p-2 rounded-md">
+            {tooltip}
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <div
-        className="text-center pt-1 w-full text-3xl mt-10 text-white font-bold"
-        style={{
-          textShadow:
-            "2px 0px 0px rgb(0, 0, 0), 0px -1px 0px rgb(0, 0, 0), 0px 1px 0px rgb(0, 0, 0), -1px 0px 0px rgb(0, 0, 0)",
-        }}
-      >
-        All Rights reserved • Service Hub by Total Mizers Ltd. Toronto, Ontario
-        CANADA (416) 333.FAST (3278) Copyright © 2016 - 2024, Les The Handyman.
+      {/* Form Section */}
+      <div className="flex justify-center px-4">
+        <div className="font-myriad w-full max-w-lg bg-gray-800 p-4 rounded-lg">
+          <form className="flex flex-col gap-6">
+
+            {/* Name Field */}
+            <div className="flex items-center gap-1">
+              <img
+                src="/assets/images/1.jpg"
+                className="w-12 sm:w-16 rounded-full"
+                alt="Name Icon"
+              />
+              <div className="relative flex items-center w-full">
+                <img
+                  src="/assets/images/user.png"
+                  className={`w-8 sm:w-12 rounded-full absolute left-1/2 transform -translate-x-1/2 transition-opacity ${formData.name ? 'opacity-0' : 'opacity-100'}`}
+                  alt="Name Icon"
+                />
+                <input
+                  className="w-full text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder=""
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  onMouseEnter={() => handleTooltip("Please enter your First and Last name")}
+                  onMouseLeave={clearTooltip}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Email Field */}
+            <div className="flex items-center gap-1">
+              <img
+                src="/assets/images/2.jpg"
+                className="w-12 sm:w-16 rounded-full"
+                alt="Email Icon"
+              />
+              <input
+                className="w-full text-base sm:text-lg lg:text-2xl border-none text-center  rounded-md placeholder:text-black bg-white font-extrabold  px-4 py-2 focus:ring-indigo-500"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="@"
+                value={formData.email}
+                onChange={handleInputChange}
+                onMouseEnter={() => handleTooltip("Enter a valid email address")}
+                onMouseLeave={clearTooltip}
+                required
+              />
+            </div>
+
+            {/* Phone Field */}
+            <div className="flex items-center gap-1">
+              <img
+                src="/assets/images/3.jpg"
+                className="w-12 sm:w-16 rounded-full"
+                alt="Phone Icon"
+              />
+              <div className="flex w-full gap-2">
+                <input
+                  className="text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 w-16"
+                  name="phoneCode"
+                  type="text"
+                  placeholder="Country Code"
+                  value={formData.phoneCode}
+                  onChange={handlePhoneCodeChange}
+                  onMouseEnter={() => handleTooltip("Enter the country code")}
+                  onMouseLeave={clearTooltip}
+                />
+               <div className="relative w-full">
+  <input
+    className="w-full text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
+    id="phone"
+    name="phoneNumber"
+    type="tel"
+    placeholder=""
+    value={formData.phoneNumber}
+    onChange={handleInputChange}
+    onMouseEnter={() => handleTooltip("Enter a valid phone number")}
+    onMouseLeave={clearTooltip}
+    style={{
+      backgroundImage: "url('/assets/images/num.jpeg')", // Keep the image always
+      backgroundSize: "cover", // Or change to 'contain' depending on your preference
+      backgroundPosition: "center", // Adjust image position
+      backgroundRepeat: "no-repeat", // To avoid repetition if the image is smaller than the field
+    }}
+  />
+</div>
+              </div>
+            </div>
+          </form>
+
+          {/* Conditional Icon Display */}
+          {areEmailAndPhoneValid && (
+            <div className="flex flex-col items-center mt-6">
+              <img
+                src="/assets/images/button ok check.webp"
+                alt="Success Icon"
+                className="w-16 sm:w-20 lg:w-24 cursor-pointer"
+                onClick={handleIconClick}
+              />
+              <p className="text-yellow-500 text-lg sm:text-xl font-bold mt-2">
+                Check Email and Phone are valid?
+              </p>
+            </div>
+          )}
+
+          {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <div className="text-center py-4 mt-10 text-white text-sm sm:text-base lg:text-lg">
+        All Rights Reserved • Service Hub by Total Mizers Ltd. Toronto, Ontario, CANADA
+        <br />
+        (416) 333.FAST (3278) Copyright © 2016 - 2024, Les The Handyman.
       </div>
     </div>
   );
