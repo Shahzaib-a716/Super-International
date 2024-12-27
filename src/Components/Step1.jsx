@@ -113,7 +113,7 @@ const BookingForm = () => {
                   alt="Name Icon"
                 />
                 <input
-                  className="w-full text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
+                  className="w-full text-base sm:text-2xl font-bold lg:text-2xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
                   id="name"
                   name="name"
                   type="text"
@@ -166,9 +166,9 @@ const BookingForm = () => {
                   onMouseEnter={() => handleTooltip("Enter the country code")}
                   onMouseLeave={clearTooltip}
                 />
-               <div className="relative w-full">
+       <div className="relative w-full">
   <input
-    className="w-full text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
+    className="w-full text-base sm:text-2xl lg:text-3xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
     id="phone"
     name="phoneNumber"
     type="tel"
@@ -178,13 +178,14 @@ const BookingForm = () => {
     onMouseEnter={() => handleTooltip("Enter a valid phone number")}
     onMouseLeave={clearTooltip}
     style={{
-      backgroundImage: "url('/assets/images/num.jpeg')", // Keep the image always
-      backgroundSize: "cover", // Or change to 'contain' depending on your preference
+      backgroundImage: formData.phoneNumber ? "none" : "url('/assets/images/num.jpeg')", // Conditionally remove image if field is not empty
+      backgroundSize: "cover", // Adjust how the image fits in the input field
       backgroundPosition: "center", // Adjust image position
-      backgroundRepeat: "no-repeat", // To avoid repetition if the image is smaller than the field
+      backgroundRepeat: "no-repeat", // Prevent image repetition
     }}
   />
 </div>
+
               </div>
             </div>
           </form>
