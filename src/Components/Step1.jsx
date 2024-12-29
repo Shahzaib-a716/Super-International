@@ -8,7 +8,7 @@ const BookingForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneCode: "+1", // Default country code (you can set this to any default code)
+    phoneCode: "", // Default country code (you can set this to any default code)
     phoneNumber: "",
   });
 
@@ -88,7 +88,7 @@ const BookingForm = () => {
           }}
         >
           {/* Tooltip Display Area */}
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white text-lg sm:text-2xl font-bold bg-black bg-opacity-75 text-nowrap p-2 rounded-md">
+          <div className="absolute bottom-2 left-1/2 bg-green-600 transform -translate-x-1/2 text-yellow-200 text-2xl  sm:text-3xl font-bold  bg-opacity-75 text-nowrap p-2 rounded-md">
             {tooltip}
           </div>
         </div>
@@ -113,14 +113,14 @@ const BookingForm = () => {
                   alt="Name Icon"
                 />
                 <input
-                  className="w-full text-base sm:text-2xl font-bold lg:text-2xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
+                  className="w-full text-base sm:text-2xl font-bold lg:text-4xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
                   id="name"
                   name="name"
                   type="text"
                   placeholder=""
                   value={formData.name}
                   onChange={handleInputChange}
-                  onMouseEnter={() => handleTooltip("Please enter your First and Last name")}
+                  onMouseEnter={() => handleTooltip("Enter your Name")}
                   onMouseLeave={clearTooltip}
                   required
                 />
@@ -135,7 +135,7 @@ const BookingForm = () => {
                 alt="Email Icon"
               />
               <input
-                className="w-full text-base sm:text-lg lg:text-2xl border-none text-center  rounded-md placeholder:text-black bg-white font-extrabold  px-4 py-2 focus:ring-indigo-500"
+                className="w-full text-base sm:text-sm lg:text-4xl border-none text-center  rounded-md placeholder:text-black bg-white font-black   px-4 py-2 focus:ring-indigo-500"
                 id="email"
                 name="email"
                 type="email"
@@ -157,10 +157,10 @@ const BookingForm = () => {
               />
               <div className="flex w-full gap-2">
                 <input
-                  className="text-base sm:text-lg lg:text-xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 w-16"
+                  className="text-base sm:text-lg lg:text-3xl font-bold border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 w-16"
                   name="phoneCode"
                   type="text"
-                  placeholder="Country Code"
+                  placeholder=""
                   value={formData.phoneCode}
                   onChange={handlePhoneCodeChange}
                   onMouseEnter={() => handleTooltip("Enter the country code")}
@@ -168,7 +168,7 @@ const BookingForm = () => {
                 />
        <div className="relative w-full">
   <input
-    className="w-full text-base sm:text-2xl lg:text-3xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
+    className="w-full text-base sm:text-2xl lg:text-3xl border-none font-bold rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
     id="phone"
     name="phoneNumber"
     type="tel"
@@ -199,6 +199,9 @@ const BookingForm = () => {
                 className="w-16 sm:w-20 lg:w-24 cursor-pointer"
                 onClick={handleIconClick}
               />
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
+      OK
+    </div>
               <p className="text-yellow-500 text-lg sm:text-xl font-bold mt-2">
                 Check Email and Phone are valid?
               </p>
