@@ -66,7 +66,7 @@ const BookingForm = () => {
     <div className="min-h-screen w-full bg-gray-800 bg-day bg-no-repeat bg-center bg-cover">
       {/* Top Heading Section */}
       <div className="w-full bg-gray-800 text-center py-4">
-        <h2 className="text-green-400 text-2xl sm:text-3xl lg:text-4xl font-bold">
+        <h2 className="text-green-400 text-3xl sm:text-3xl lg:text-4xl font-bold">
           STAND ALONE <br />
           MULTI-TIME-ZONE <br />
         </h2>
@@ -80,7 +80,7 @@ const BookingForm = () => {
       <div className="flex justify-center items-center my-4">
         <div
           id="header"
-          className="w-full max-w-lg h-36 bg-center bg-cover relative"
+          className="w-full max-w-3xl h-36 bg-center bg-cover relative"
           style={{
             backgroundImage: "url('/assets/images/heaad.jpeg')",
             backgroundSize: "cover",
@@ -96,9 +96,8 @@ const BookingForm = () => {
 
       {/* Form Section */}
       <div className="flex justify-center px-4">
-        <div className="font-myriad w-full max-w-lg bg-gray-800 p-4 rounded-lg">
+        <div className="font-myriad w-full max-w-3xl bg-gray-800 p-8 rounded-lg">
           <form className="flex flex-col gap-6">
-
             {/* Name Field */}
             <div className="flex items-center gap-1">
               <img
@@ -113,7 +112,7 @@ const BookingForm = () => {
                   alt="Name Icon"
                 />
                 <input
-                  className="w-full text-base sm:text-2xl font-bold lg:text-4xl border-none rounded-md placeholder:text-black bg-white px-4 py-2 pl-14 focus:ring-indigo-500"
+                  className="w-full text-base sm:text-2xl font-bold lg:text-5xl border-none rounded-md placeholder:text-black bg-white px-4 py-4 text-center focus:ring-indigo-500"
                   id="name"
                   name="name"
                   type="text"
@@ -135,7 +134,7 @@ const BookingForm = () => {
                 alt="Email Icon"
               />
               <input
-                className="w-full text-base sm:text-sm lg:text-4xl border-none text-center  rounded-md placeholder:text-black bg-white font-black   px-4 py-2 focus:ring-indigo-500"
+                className="w-full text-base sm:text-sm lg:text-4xl border-none text-center rounded-md placeholder:text-black bg-white font-black placeholder-text-center px-4 py-4 focus:ring-indigo-500"
                 id="email"
                 name="email"
                 type="email"
@@ -157,7 +156,7 @@ const BookingForm = () => {
               />
               <div className="flex w-full gap-2">
                 <input
-                  className="text-base sm:text-lg lg:text-3xl font-bold border-none rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 w-16"
+                  className="text-base sm:text-lg lg:text-4xl font-bold border-none rounded-md placeholder:text-black bg-white px-4 py-4 focus:ring-indigo-500 w-32 text-center"
                   name="phoneCode"
                   type="text"
                   placeholder=""
@@ -166,26 +165,25 @@ const BookingForm = () => {
                   onMouseEnter={() => handleTooltip("Enter the country code")}
                   onMouseLeave={clearTooltip}
                 />
-       <div className="relative w-full">
-  <input
-    className="w-full text-base sm:text-2xl lg:text-3xl border-none font-bold rounded-md placeholder:text-black bg-white px-4 py-2 focus:ring-indigo-500 bg-cover bg-center"
-    id="phone"
-    name="phoneNumber"
-    type="tel"
-    placeholder=""
-    value={formData.phoneNumber}
-    onChange={handleInputChange}
-    onMouseEnter={() => handleTooltip("Enter a valid phone number")}
-    onMouseLeave={clearTooltip}
-    style={{
-      backgroundImage: formData.phoneNumber ? "none" : "url('/assets/images/num.jpeg')", // Conditionally remove image if field is not empty
-      backgroundSize: "cover", // Adjust how the image fits in the input field
-      backgroundPosition: "center", // Adjust image position
-      backgroundRepeat: "no-repeat", // Prevent image repetition
-    }}
-  />
-</div>
-
+                <div className="relative w-full">
+                  <input
+                    className="w-full text-base sm:text-2xl lg:text-4xl border-none font-bold rounded-md placeholder:text-black bg-white px-4 py-4 focus:ring-indigo-500 bg-cover bg-center text-center"
+                    id="phone"
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder=""
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    onMouseEnter={() => handleTooltip("Enter a valid phone number")}
+                    onMouseLeave={clearTooltip}
+                    style={{
+                      backgroundImage: formData.phoneNumber ? "none" : "url('/assets/images/num.jpeg')", // Conditionally remove image if field is not empty
+                      backgroundSize: "cover", // Adjust how the image fits in the input field
+                      backgroundPosition: "center", // Adjust image position
+                      backgroundRepeat: "no-repeat", // Prevent image repetition
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </form>
@@ -199,10 +197,10 @@ const BookingForm = () => {
                 className="w-16 sm:w-20 lg:w-24 cursor-pointer"
                 onClick={handleIconClick}
               />
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
-      OK
-    </div>
-              <p className="text-yellow-500 text-lg sm:text-xl font-bold mt-2">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300 text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
+                OK
+              </div>
+              <p className="text-yellow-500 text- sm:text-5xl whitespace-nowrap font-bold mt-2">
                 Check Email and Phone are valid?
               </p>
             </div>
@@ -213,10 +211,10 @@ const BookingForm = () => {
       </div>
 
       {/* Footer Section */}
-      <div className="text-center py-4 mt-10 text-white text-sm sm:text-base lg:text-lg">
-        All Rights Reserved • Service Hub by Total Mizers Ltd. Toronto, Ontario, CANADA
+      <div className="text-center py-4 mt-10 text-white text-sm sm:text-base lg:text-4xl">
+        All Rights Reserved • Service Hub by Total Mizers Ltd. 
         <br />
-        (416) 333.FAST (3278) Copyright © 2016 - 2024, Les The Handyman.
+        Toronto, Ontario, CANADA (416) 333.FAST (3278) Copyright © 2016 - 2024, Les The Handyman.
       </div>
     </div>
   );
