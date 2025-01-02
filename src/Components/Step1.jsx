@@ -88,7 +88,7 @@ const BookingForm = () => {
           }}
         >
           {/* Tooltip Display Area */}
-          <div className="absolute bottom-2 left-1/2 bg-green-600 transform -translate-x-1/2 text-yellow-200 text-2xl  sm:text-3xl font-bold  bg-opacity-75 text-nowrap p-2 rounded-md">
+          <div className="absolute bottom-2 left-1/2 bg-green-600 transform -translate-x-1/2 text-yellow-200 text-2xl  sm:text-5xl font-bold  bg-opacity-75 text-nowrap p-4 rounded-md">
             {tooltip}
           </div>
         </div>

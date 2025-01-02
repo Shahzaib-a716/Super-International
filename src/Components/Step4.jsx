@@ -158,7 +158,7 @@ const Step3 = () => {
             </h1>
           </a>
           <div className="flex justify-center items-center">
-            <h1 className="md:text-3xl font-extrabold text-yellow-600">
+            <h1 className="md:text-4xl font-extrabold text-yellow-600">
               Select One or more types of messages & then press OK to send it
             </h1>
           </div>
@@ -207,7 +207,7 @@ const Step3 = () => {
         {/* Voice Progress Bar */}
         {isRecording && (
           <div className="relative mt-1">
-            <div className=" h-10 ml-[150px] rounded-3xl  w-[400px] bg-gray-300">
+            <div className=" h-10 ml-[150px] mt-[50px] rounded-3xl  w-[400px] bg-gray-300">
               <div
                 className="h-[40px] rounded-full animate-heartbeat bg-green-800"
                 style={{ width: `${progress}%` }}
@@ -219,12 +219,12 @@ const Step3 = () => {
         {/* Replace Icon D with Text Input Field */}
         {isTextInputVisible && (
           <div
-            className="absolute top-0 left-0 w-full mt-8 px-4"
+            className="absolute top-0 left-0 w-full mt-8 px-8"
             style={{ position: 'absolute', top: '340px', left: '50%', transform: 'translateX(-50%)' }}
           >
             <textarea
               autoFocus
-              className="resize rounded-5xl w-full border-4 border-blue-500 text-5xl hover:text-6xl text-yellow-600"
+              className="resize rounded-7xl  w-[700px] h-[200px] border-4 border-blue-500 text-6xl  text-yellow-600"
               placeholder="Type Here!"
               aria-label="Message Input"
               value={textMessage}
