@@ -12,6 +12,7 @@ const Step3 = () => {
   const [isTextInputVisible, setIsTextInputVisible] = useState(false); // State for text input visibility
   const [isVideoRecording, setIsVideoRecording] = useState(false);
   const [audioStatus, setAudioStatus] = useState(""); // To track audio recording status
+  const [progress, setProgress] = useState(0); // To track the voice recording progress
   const audioChunks = useRef([]);
   const mediaRecorderRef = useRef(null);
   const videoRecorderRef = useRef(null);
@@ -69,13 +70,26 @@ const Step3 = () => {
     setRecordingTime(0);
     setIsRecording(true);
     setAudioStatus("Recording...");
+    setProgress(0); // Reset progress
     mediaRecorderRef.current.start();
+
+    // Animate progress bar while recording
+    let interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval); // Stop when progress reaches 100%
+          return 100;
+        }
+        return prev + 1; // Increase progress by 1% per second
+      });
+    }, 100);
   };
 
   const stopAudioRecording = () => {
     mediaRecorderRef.current.stop();
     setIsRecording(false);
     setAudioStatus("Audio stopped");
+    setProgress(0); // Reset progress bar when recording stops
   };
 
   useEffect(() => {
@@ -125,8 +139,7 @@ const Step3 = () => {
   };
 
   const handleTextIconClick = () => {
-    // When Icon D is clicked, make the input field visible and hide the icon D
-    setIsTextInputVisible(true); // Show the text input field and hide the icon
+    setIsTextInputVisible(true);
   };
 
   const handleFileDelete = (fileUrl) => {
@@ -182,15 +195,26 @@ const Step3 = () => {
             </div>
           </div>
 
-          {/* Icon D - Text Icon */}
+          {/* Text Icon */}
           <div
             className={`cursor-pointer ${isTextInputVisible ? "hidden" : ""}`}
             onClick={handleTextIconClick}
           >
             <img className="cursor-pointer" src="/assets/images/text.webp" alt="Text Icon" />
-           
           </div>
         </div>
+
+        {/* Voice Progress Bar */}
+        {isRecording && (
+          <div className="relative mt-1">
+            <div className=" h-10 ml-[150px] rounded-3xl  w-[400px] bg-gray-300">
+              <div
+                className="h-[40px] rounded-full animate-heartbeat bg-green-800"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
 
         {/* Replace Icon D with Text Input Field */}
         {isTextInputVisible && (
@@ -247,36 +271,31 @@ const Step3 = () => {
 
         {/* Action Buttons */}
         <div className="mt-4 flex justify-between">
-  {/* Cancel Icon with Tooltip */}
-  <div className="relative group">
-    <img
-      src="/assets/images/button cancel no.webp"
-      alt="Cancel Icon"
-      className="w-[70px] h-[75px] cursor-pointer transform transition duration-300 ease-in-out hover:scale-110"
-    />
-    {/* Tooltip for Cancel Icon */}
-    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
-      Cancel
-    </div>
-  </div>
+          <div className="relative group">
+            <img
+              src="/assets/images/button cancel no.webp"
+              alt="Cancel Icon"
+              className="w-[70px] h-[75px] cursor-pointer transform transition duration-300 ease-in-out hover:scale-110"
+            />
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
+              Cancel
+            </div>
+          </div>
 
-  {/* Send Icon with Tooltip */}
-  <div className="relative group">
-    <img
-      src="/assets/images/button ok check.webp"
-      alt="Send Icon"
-      onClick={handleSendMessage}
-      className="w-[70px] h-[75px] cursor-pointer transform transition duration-300 ease-in-out hover:scale-110"
-    />
-    {/* Tooltip for Send Icon */}
-    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
-      Send Messages
+          <div className="relative group">
+            <img
+              src="/assets/images/button ok check.webp"
+              alt="Send Icon"
+              onClick={handleSendMessage}
+              className="w-[70px] h-[75px] cursor-pointer transform transition duration-300 ease-in-out hover:scale-110"
+            />
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-yellow-300  text-yellow-600 text-2xl whitespace-nowrap px-3 py-2 rounded-lg">
+              Send Messages
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</div>
-</div>
-
   );
 };
 
