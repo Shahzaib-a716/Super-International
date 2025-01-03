@@ -211,10 +211,12 @@ const BookingForm = () => {
       </div>
 
       {/* Footer Section */}
-      <div className="text-center py-4 mt-10 text-white text-sm sm:text-base lg:text-4xl">
+      <div className="text-center py-4 font-semibold mt-10 text-white text-sm sm:text-base lg:text-4xl">
         All Rights Reserved • Service Hub by Total Mizers Ltd. 
         <br />
-        Toronto, Ontario, CANADA (416) 333.FAST (3278) Copyright © 2016 - 2024, Les The Handyman.
+        Toronto, Ontario, CANADA (416) 333.FAST (3278) 
+        <br />
+        Copyright © 2016 - 2024, Les The Handyman.
       </div>
     </div>
   );

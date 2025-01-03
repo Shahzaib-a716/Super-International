@@ -10,7 +10,7 @@ const EmergencyPage = () => {
     >
       <div className="w-full max-w-6xl p-6 bg-white rounded-xl shadow-xl">
         {/* Top Row Headings */}
-         <h1 className='text-yellow-500 text-5xl font-bold pb-2'>YOUR MESSAGE ARE SEND SUCCESSFULLY</h1>
+         <h1 className='text-yellow-500 text-5xl font-bold pb-2'>YOUR MESSAGE WAS SEND </h1>
         
 
         {/* Text Section */}
